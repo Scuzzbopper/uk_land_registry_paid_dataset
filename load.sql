@@ -98,10 +98,12 @@ CREATE TABLE `summary` (
 	  `month` int(2) DEFAULT NULL,
 	  `county` varchar(60) DEFAULT NULL,
 	  `district` varchar(60) DEFAULT NULL,
-	  `total_price` decimal(14,2) DEFAULT NULL
+	  `total_price` decimal(14,2) DEFAULT NULL,
+	   `houses_sold` int NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 alter table summary add index postcode(postcode), add index year(year);
 
-insert into summary as select trim(left(postcode,4)) as postcode, year(date) as year,month(date) as month, county, district, sum(price) as total_price from landregistry group by trim(left(postcode,4)), year(date),month(date), county, district;
+insert into summary as select trim(left(postcode,4)) as postcode, year(date) as year,month(date) as month, county, district, sum(price) as total_price,count(1) as houses_sold
+from landregistry group by trim(left(postcode,4)), year(date),month(date), county, district;
 
 
