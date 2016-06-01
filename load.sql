@@ -4,23 +4,22 @@ drop table landregistry.landregistry;
 
 -- #column nmes are a work in progress
 create table landregistry.landregistry(
-	uuid varchar(255) default null, 
-	price decimal(12,2) default null, 
+	uuid char(38) default null, 
+	price decimal(13,2) default null, 
 	date datetime default null, 
-	postcode varchar(255) default null, 
-	type1 varchar(255) default null comment 'Terraced/Detached/Semi-detached', 
-	type2 varchar(255) default null, 
-	type3 varchar(255) default null comment 'Freehold/Leased', 
-	address1 varchar(255) default null,
-	address2 varchar(255) default null,
-	address1 varchar(255) default null,
-	address2 varchar(255) default null,
-	address3 varchar(255) default null,
-	county varchar(255) default null,
-	district varchar(255) default null,
-	transactiontype1 varchar(255) default null,
-	transactiontyp2 varchar(255) default null);
-alter table landregistry.landregistry add primary key (uuid);
+	postcode varchar(10) default null, 
+	type1 char(1) default null comment 'Terraced/Detached/Semi-detached', 
+	type2 char(1) default null, 
+	type3 char(1) default null comment 'Freehold/Leased', 
+	address1 varchar(120) default null,
+	address2 varchar(120) default null,
+	address3 varchar(120) default null,
+	address4 varchar(120) default null,
+	address5 varchar(120) default null,
+	county varchar(60) default null,
+	district varchar(60) default null,
+	transactiontype1 char(1) default null,
+	transactiontyp2 char(1) default null);
 
 -- # this will/should work without any warnings or errors as the land registry data is quite stable
 load data infile '/tmp/pp-1995-part1.csv' ignore into table landregistry.landregistry fields terminated by ',' enclosed by '"' lines terminated by '\r\n';
