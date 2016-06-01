@@ -92,4 +92,4 @@ load data infile '/tmp/pp-20161.csv' ignore into table landregistry.landregistry
 load data infile '/tmp/pp-monthly-update-new-version.csv' ignore into table landregistry.landregistry fields terminated by ',' enclosed by '"' lines terminated by '\r\n';
 load data infile '/tmp/pp-monthly-update-new-version1.csv' ignore into table landregistry.landregistry fields terminated by ',' enclosed by '"' lines terminated by '\r\n';
 
-
+create table summary as select postcode, year(date) as year,month(date) as month, county, district, sum(price) as total_price from landregistry group by postcode, year(date),month(date), county, district;
